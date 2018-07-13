@@ -28,10 +28,12 @@
             android:paddingTop="8dp">
 
             <ImageView
+                app:imageUrl="@{trip.imageUrl}"
+                app:srcCompat="@mipmap/ic_launcher_round"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:src="@mipmap/ic_launcher"
+                tools:src="@mipmap/ic_launcher"
                 android:contentDescription="Trip Image"/>
 
             <TextView

@@ -1,5 +1,6 @@
 package sample.onursaygili.assettracking.ui.triplist
 
+import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil.inflate
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +9,7 @@ import sample.onursaygili.assettracking.R
 import sample.onursaygili.assettracking.data.local.Trip
 import sample.onursaygili.assettracking.databinding.TripListItemBinding
 
-class TripAdapter : RecyclerView.Adapter<TripAdapter.ViewHolder>() {
+class TripAdapter(private val dataBindingComponent: DataBindingComponent) : RecyclerView.Adapter<TripAdapter.ViewHolder>() {
     val items = ArrayList<Trip>()
 
     lateinit var itemClickListener: ItemClickListener
@@ -22,7 +23,8 @@ class TripAdapter : RecyclerView.Adapter<TripAdapter.ViewHolder>() {
                 LayoutInflater.from(parent.context),
                 R.layout.trip_list_item,
                 parent,
-                false
+                false,
+                dataBindingComponent
         ))
     }
 
@@ -41,6 +43,7 @@ class TripAdapter : RecyclerView.Adapter<TripAdapter.ViewHolder>() {
             binding.setVariable(com.android.databinding.library.baseAdapters.BR.trip, currentItem)
             binding.executePendingBindings()
             binding.root.setOnClickListener { listener(currentItem) }
+
         }
     }
 }

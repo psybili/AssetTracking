@@ -3,15 +3,18 @@ package sample.onursaygili.assettracking.ui.triplist
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import sample.onursaygili.assettracking.R
+import sample.onursaygili.assettracking.binding.FragmentDataBindingComponent
 import sample.onursaygili.assettracking.data.local.Trip
 import sample.onursaygili.assettracking.databinding.TripListFragmentBinding
 import sample.onursaygili.assettracking.di.Injectable
@@ -24,7 +27,8 @@ open class TripListFragment : Fragment(), Injectable {
 
     private lateinit var viewModel: TripListViewModel
     private lateinit var binding: TripListFragmentBinding
-    private val adapter = TripAdapter()
+    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
+    private val adapter = TripAdapter(dataBindingComponent)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -55,6 +59,7 @@ open class TripListFragment : Fragment(), Injectable {
     }.root
 
     fun onTripListItemClick(trip: Trip) {
+        Log.e("MAP", trip.imageUrl)
         Toast.makeText(context, trip.toString(), Toast.LENGTH_LONG).show()
     }
 

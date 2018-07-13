@@ -1,12 +1,13 @@
 package sample.onursaygili.assettracking.data.local
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.ForeignKey.CASCADE
 import android.databinding.BaseObservable
 
 @Entity(
-        primaryKeys = ["tripId", "time"],
-        foreignKeys = [(android.arch.persistence.room.ForeignKey(
+        primaryKeys = ["tripId", "time"]
+        , foreignKeys = [(ForeignKey(
                 entity = Trip::class,
                 parentColumns = ["id"],
                 childColumns = ["tripId"],

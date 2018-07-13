@@ -16,12 +16,14 @@ data class Trip(
     var startDate = Date()
     var endDate: Date? = null
     var tripStatus: Int? = 1
+    var imageUrl: String? = null
 
     override fun toString(): String {
         val sb = StringBuilder()
         if (id != null) sb.append("id: $id")
         sb.append("\nstart: $startDate")
         if (endDate != null) sb.append("\nend: $endDate")
+        if (tripStatus != null) sb.append("\nstatus: $tripStatus")
         return sb.toString()
     }
 }

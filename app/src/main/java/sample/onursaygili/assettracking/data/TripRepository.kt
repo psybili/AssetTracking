@@ -1,11 +1,10 @@
 package sample.onursaygili.assettracking.data
 
 import android.arch.lifecycle.LiveData
-import sample.onursaygili.assettracking.data.local.Location
-import sample.onursaygili.assettracking.data.local.LocationDao
-import sample.onursaygili.assettracking.data.local.Trip
-import sample.onursaygili.assettracking.data.local.TripDao
+import android.util.Log
+import sample.onursaygili.assettracking.data.local.*
 import javax.inject.Inject
+import kotlin.concurrent.timer
 
 class TripRepository
 @Inject constructor(
@@ -25,12 +24,27 @@ class TripRepository
         return tripDao.getCurrentTrip()
     }
 
-    fun saveLocalTrip(trip: Trip) {
-        tripDao.insert(trip)
-    }
-
     fun saveLocation(location: Location) {
         locationDao.insert(location)
+    }
+
+
+    fun getTripAndAllLocations(tripId: Long): LiveData<TripAndAllLocations> {
+        return tripDao.getTripLocations(tripId)
+    }
+
+    fun getCurrentTripAndAllLocations(): TripAndAllLocations {
+        return tripDao.getCurrentTripLocations()
+    }
+
+    fun saveTrip(trip: Trip) {
+        saveLocalTrip(trip)
+        val tripAndAllLocations = getTripAndAllLocations(trip.id!!)
+        val locations = tripAndAllLocations.value?.locations
+    }
+
+    fun saveLocalTrip(trip: Trip) {
+        tripDao.insert(trip)
     }
 
 }

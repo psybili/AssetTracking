@@ -1,10 +1,15 @@
 package sample.onursaygili.assettracking.ui.tracking
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.Transformations.switchMap
 import android.arch.lifecycle.ViewModel
 import android.location.Location
 import sample.onursaygili.assettracking.data.TripRepository
 import sample.onursaygili.assettracking.data.local.Trip
+import sample.onursaygili.assettracking.data.local.TripAndAllLocations
+import sample.onursaygili.assettracking.data.remote.getMapUrl
 import sample.onursaygili.assettracking.util.ioThread
 import java.util.*
 import javax.inject.Inject
@@ -15,6 +20,10 @@ class TrackingViewModel
 
     var currentTrip: LiveData<Trip> = tripRepository.getCurrentTrip()
 
+    var tripAndAllLocations = switchMap(currentTrip) {
+        tripRepository.getTripAndAllLocations(it.id!!)
+    }
+
     fun startTracking() {
         val trip = Trip()
         trip.tripStatus = 1
@@ -24,11 +33,14 @@ class TrackingViewModel
     }
 
     fun stopTracking() {
-        val trip = currentTrip.value!!
-        trip.endDate = Date()
-        trip.tripStatus = 0
         ioThread {
-            tripRepository.saveLocalTrip(trip)
+            val tripAndAllLocations = tripRepository.getCurrentTripAndAllLocations()
+            val trip = tripAndAllLocations.trip!!
+            trip.endDate = Date()
+            trip.tripStatus = 0
+            if (tripAndAllLocations.locations != null && tripAndAllLocations.locations.isNotEmpty())
+                trip.imageUrl = getMapUrl(128, 128, tripAndAllLocations.locations)
+            tripRepository.saveTrip(trip)
         }
     }
 

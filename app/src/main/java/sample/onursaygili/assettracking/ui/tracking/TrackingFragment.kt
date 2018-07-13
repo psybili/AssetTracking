@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.*
 import android.content.pm.PackageManager
+import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.location.Location
 import android.net.Uri
@@ -25,16 +26,14 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.tracking_fragment.*
-import kotlinx.android.synthetic.main.trip_list_item.*
 import sample.onursaygili.assettracking.BuildConfig
 import sample.onursaygili.assettracking.R
+import sample.onursaygili.assettracking.binding.FragmentDataBindingComponent
 import sample.onursaygili.assettracking.data.LocationUpdatesService
 import sample.onursaygili.assettracking.data.local.Trip
 import sample.onursaygili.assettracking.databinding.TrackingFragmentBinding
-import sample.onursaygili.assettracking.databinding.TripListFragmentBinding
 import sample.onursaygili.assettracking.di.Injectable
 import sample.onursaygili.assettracking.util.LocationUtils
-import java.text.DateFormat
 import javax.inject.Inject
 
 private const val TAG = "TrackingFragment"
@@ -73,6 +72,8 @@ class TrackingFragment : Fragment(), Injectable, SharedPreferences.OnSharedPrefe
             serviceBound = false
         }
     }
+
+    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     companion object {
         fun newInstance(): TrackingFragment = TrackingFragment()
