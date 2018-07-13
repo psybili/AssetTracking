@@ -20,10 +20,6 @@ class TrackingViewModel
 
     var currentTrip: LiveData<Trip> = tripRepository.getCurrentTrip()
 
-    var tripAndAllLocations = switchMap(currentTrip) {
-        tripRepository.getTripAndAllLocations(it.id!!)
-    }
-
     fun startTracking() {
         val trip = Trip()
         trip.tripStatus = 1
