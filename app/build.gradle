@@ -1,18 +1,20 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "sample.onursaygili.assettracking"
-        minSdkVersion 25
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        enabled = true
     }
     buildTypes {
         release {
@@ -22,11 +24,61 @@ android {
     }
 }
 
+ext.support_version="27.1.1"
+ext.play_services="15.0.1"
+ext.dagger_version = "2.15"
+ext.arch_version = "1.1.1"
+ext.mockito_version = "2.7.19"
+ext.mockito_all_version = "1.10.19"
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // support libraries
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:support-v4:$support_version"
+    implementation "com.android.support:design:$support_version"
+    implementation "com.android.support:recyclerview-v7:$support_version"
+    implementation "com.android.support:cardview-v7:$support_version"
+    implementation "com.android.support.constraint:constraint-layout:1.1.2"
+
+    // architecture components
+    implementation "android.arch.lifecycle:runtime:$arch_version"
+    implementation "android.arch.lifecycle:extensions:$arch_version"
+    implementation "android.arch.lifecycle:reactivestreams:$arch_version"
+    implementation "android.arch.persistence.room:runtime:$arch_version"
+    implementation "android.arch.persistence.room:rxjava2:$arch_version"
+    kapt "android.arch.lifecycle:compiler:$arch_version"
+    kapt "android.arch.persistence.room:compiler:$arch_version"
+
+    // play services
+//    implementation "com.google.android.gms:play-services-maps:$play_services"
+    implementation ("com.google.android.gms:play-services-location:$play_services") {
+        exclude group: 'com.android.support'
+    }
+
+    // dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // data binding
+    kapt 'com.android.databinding:compiler:3.1.3'
+
     testImplementation 'junit:junit:4.12'
+
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-all:$mockito_all_version"
+    testImplementation("android.arch.core:core-testing:$arch_version", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

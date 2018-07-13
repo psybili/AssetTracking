@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="trip"
+            type="sample.onursaygili.assettracking.data.local.Trip" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fragment_tracking_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        tools:context=".ui.tracking.TrackingFragment">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/tripRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentPadding="8dp"
+            app:cardBackgroundColor="@color/tripRecordBackground"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tripTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{trip.id.toString()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tripStartLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tripTitle" />
+
+                <TextView
+                    android:id="@+id/startDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{trip.startDate.toString()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tripStartLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/tripTitle" />
+
+                <TextView
+                    android:id="@+id/tripEndLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="End"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tripStartLabel" />
+
+                <TextView
+                    android:id="@+id/endDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{trip.endDate.toString()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tripEndLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/startDateTextView" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/buttonStartBackground"
+            android:text="@string/start_button_text"
+            android:textColor="@color/buttonText"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tripRecord"
+            tools:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/buttonStopBackground"
+            android:text="@string/stop_button_text"
+            android:textColor="@color/buttonText"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tripRecord"
+            tools:textColor="@android:color/background_light" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

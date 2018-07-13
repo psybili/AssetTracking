@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="buttonStartBackground">#2fb511</color>
+    <color name="buttonStopBackground">#b5112a</color>
+    <color name="buttonText">#FFFFFF</color>
+
+    <color name="tripRecordBackground">#fafdfa</color>
 </resources>
