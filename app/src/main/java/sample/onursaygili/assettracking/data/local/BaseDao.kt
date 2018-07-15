@@ -7,7 +7,10 @@ import android.databinding.BaseObservable
 interface BaseDao<T : BaseObservable> {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg t: T)
+    fun save(vararg t: T)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveAll(l: List<T>)
 
     @Update
     fun update(vararg t: T)
@@ -15,9 +18,6 @@ interface BaseDao<T : BaseObservable> {
     @Delete
     fun delete(vararg t: T)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addAll(l: List<T>)
-
     @Delete
-    fun delete(l: List<T>)
+    fun deleteAll(l: List<T>)
 }

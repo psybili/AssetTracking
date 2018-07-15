@@ -17,6 +17,7 @@ import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
 import android.support.v4.app.NotificationCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 
@@ -193,15 +194,14 @@ class LocationUpdatesService : Service() {
         // do nothing. Otherwise, we make this service a foreground service.
         if (!changingConfiguration && LocationUtils.requestingLocationUpdates(this)) {
             Log.i(TAG, "Starting foreground service")
-            /*
+
             // TODO(developer). If targeting O, use the following code.
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
-                notificationManager.startServiceInForeground(new Intent(this,
-                        LocationUpdatesService.class), NOTIFICATION_ID, getNotification());
+                ContextCompat.startForegroundService(this, Intent(this, LocationUpdatesService::class.java))
             } else {
-                startForeground(NOTIFICATION_ID, getNotification());
+                startForeground(NOTIFICATION_ID, notification);
             }
-             */
+
             startForeground(NOTIFICATION_ID, notification)
         }
         return true // Ensures onRebind() is called when a client re-binds.
@@ -253,8 +253,11 @@ class LocationUpdatesService : Service() {
                         if (task.isSuccessful && task.result != null) {
                             currentLocation = task.result
                         } else {
-                            Log.w(TAG, "Failed to get location.")
+                            Log.w(TAG, "Failed to get location. - ${task.exception.toString()}")
                         }
+                    }
+                    .addOnFailureListener {
+                        fusedLocationClient!!.lastLocation
                     }
         } catch (unlikely: SecurityException) {
             Log.e(TAG, "Lost location permission.$unlikely")

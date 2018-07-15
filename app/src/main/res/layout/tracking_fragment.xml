@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentPadding="8dp"
-            app:cardBackgroundColor="@color/tripRecordBackground"
-            app:cardElevation="6dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
             <android.support.constraint.ConstraintLayout
@@ -86,10 +85,8 @@
             android:id="@+id/startButton"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_marginTop="16dp"
             android:background="@color/buttonStartBackground"
             android:text="@string/start_button_text"
-            android:textColor="@color/buttonText"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,10 +98,8 @@
             android:id="@+id/stopButton"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_marginTop="16dp"
             android:background="@color/buttonStopBackground"
             android:text="@string/stop_button_text"
-            android:textColor="@color/buttonText"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

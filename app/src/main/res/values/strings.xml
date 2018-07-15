@@ -20,4 +20,5 @@
 
     <string name="location_updated">Location Updated: %1$s</string>
     <string name="tracking_active">Tracking Active!</string>
+    <string name="trip_image">Trip Image</string>
 </resources>

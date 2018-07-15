@@ -7,6 +7,7 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,7 +42,7 @@ open class TripListFragment : Fragment(), Injectable {
         }
 
         binding.tripListRecyler.adapter = adapter
-        binding.tripListRecyler.layoutManager = LinearLayoutManager(activity)
+//        binding.tripListRecyler.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.DEFAULT_SPAN_COUNT, false)
 
         viewModel.trips.observe(this, Observer {
             adapter.run {
@@ -59,8 +60,8 @@ open class TripListFragment : Fragment(), Injectable {
     }.root
 
     fun onTripListItemClick(trip: Trip) {
-        Log.e("MAP", trip.imageUrl)
-        Toast.makeText(context, trip.toString(), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, trip.toString(), Toast.LENGTH_SHORT).show()
+        Log.d("STATIS MAP URL", "${trip.imageUrl}")
     }
 
     companion object {

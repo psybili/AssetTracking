@@ -8,21 +8,20 @@ import android.arch.persistence.room.Transaction
 @Dao
 interface TripDao : BaseDao<Trip> {
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
     @Query("SELECT * FROM Trip WHERE tripStatus = 0")
-    fun getTripList(): LiveData<List<Trip>>
-
-    @Query("SELECT * FROM Trip WHERE id = :id")
-    fun getTripById(id: Long): LiveData<Trip>
+    fun listFinishedTrips(): LiveData<List<Trip>>
 
     @Query("SELECT * FROM Trip WHERE tripStatus = 1 LIMIT 1")
     fun getCurrentTrip(): LiveData<Trip>
 
     @Transaction
-    @Query("SELECT * FROM Trip WHERE id = :id")
-    fun getTripLocations(id: Long): LiveData<TripAndAllLocations>
-
-    @Transaction
     @Query("SELECT * FROM Trip WHERE tripStatus = 1")
     fun getCurrentTripLocations(): TripAndAllLocations
+
+    @Transaction
+    @Query("SELECT * FROM Trip WHERE id = :id")
+    fun getTripLocations(id: Long): LiveData<TripAndAllLocations>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

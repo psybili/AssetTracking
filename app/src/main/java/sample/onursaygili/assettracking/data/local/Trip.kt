@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import android.databinding.BaseObservable
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Entity
@@ -24,6 +25,13 @@ data class Trip(
         sb.append("\nstart: $startDate")
         if (endDate != null) sb.append("\nend: $endDate")
         if (tripStatus != null) sb.append("\nstatus: $tripStatus")
+        return sb.toString()
+    }
+
+    fun toStringCompact(): String {
+        val sb = StringBuilder()
+        sb.append("${SimpleDateFormat("EEE, MMM d, ''yy\nh:mm:ss a").format(startDate)}")
+        if (endDate != null) sb.append(" - ${SimpleDateFormat("h:mm:ss a").format(endDate)}")
         return sb.toString()
     }
 }

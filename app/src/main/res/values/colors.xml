@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+    <color name="white_10">#10ffffff</color>
+    <color name="teal">#28f1ff</color>
+    <color name="teal_dark">#23c0ca</color>
+    <color name="gray">#6e7273</color>
+    <color name="gray_dark">#494a4b</color>
 
-    <color name="buttonStartBackground">#2fb511</color>
-    <color name="buttonStopBackground">#b5112a</color>
-    <color name="buttonText">#FFFFFF</color>
+    <color name="red">#d43e15</color>
+    <color name="green">#34e49d</color>
 
-    <color name="tripRecordBackground">#fafdfa</color>
+    <color name="colorPrimary">@color/gray</color>
+    <color name="colorPrimaryDark">@color/gray_dark</color>
+    <color name="colorAccent">@color/teal</color>
+    <color name="colorAccentDark">@color/teal_dark</color>
+
+    <!-- Tracking Button -->
+    <color name="buttonStartBackground">@color/green</color>
+    <color name="buttonStopBackground">@color/red</color>
+    <color name="buttonText">@android:color/white</color>
 </resources>

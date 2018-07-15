@@ -5,7 +5,7 @@ import sample.onursaygili.assettracking.data.local.Location
 fun getMapUrl(width: Int, height: Int, locations: List<Location>): String {
     val sb = StringBuilder()
     sb.append("https://maps.googleapis.com/maps/api/staticmap?size=${width}x${height}")
-    sb.append("&path=color:0x58116665|weight:5")
+    sb.append("&path=color:0x58116665|weight:4")
     for (location in locations) {
         sb.append("|${location.latitude},${location.longitude}")
     }
