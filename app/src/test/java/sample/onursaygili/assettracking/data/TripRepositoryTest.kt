@@ -17,6 +17,7 @@
 //import sample.onursaygili.assettracking.data.local.Trip
 //import sample.onursaygili.assettracking.data.local.TripDao
 //import sample.onursaygili.assettracking.data.local.TripDatabase
+//import sample.onursaygili.assettracking.data.remote.TripService
 //import sample.onursaygili.assettracking.util.mock
 //
 //@RunWith(JUnit4::class)
@@ -25,6 +26,7 @@
 //    private lateinit var repository: TripRepository
 //    private var tripDao: TripDao = mock()
 //    private var locationDao: LocationDao = mock()
+//    private var tripService: TripService = mock()
 //
 //    @Rule
 //    @JvmField
@@ -35,7 +37,7 @@
 //    fun setUp() {
 //        val db = mock(TripDatabase::class.java)
 //        Mockito.`when`(db.tripDao()).thenReturn(tripDao)
-//        repository = TripRepository(tripDao, locationDao)
+//        repository = TripRepository(tripDao, locationDao, tripService)
 //
 //    }
 //

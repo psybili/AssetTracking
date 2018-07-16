@@ -4,9 +4,10 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import sample.onursaygili.assettracking.data.TripRepository
 import sample.onursaygili.assettracking.data.local.Trip
+import sample.onursaygili.assettracking.util.ioThread
 import javax.inject.Inject
 
-class TripListViewModel @Inject constructor(repository: TripRepository) : ViewModel() {
+class TripListViewModel @Inject constructor(private val repository: TripRepository) : ViewModel() {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     val trips: LiveData<List<Trip>> = repository.getTrips()
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,13 +16,6 @@ class TripListViewModel @Inject constructor(repository: TripRepository) : ViewMo
     }
 
     fun updateTrips() {
-//        repository.getRemoteTrips()
-//                .map {
-//                    repository.addAll(it)
-//                }
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .onErrorResumeNext(Flowable.empty())
-//                .subscribe()
+        repository.updateTrips()
     }
 }

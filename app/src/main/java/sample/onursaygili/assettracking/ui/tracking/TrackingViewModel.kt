@@ -33,7 +33,7 @@ class TrackingViewModel
             trip.endDate = Date()
             trip.tripStatus = TripStatus.FINISHED.statusCode
             if (tripAndAllLocations.locations.isNotEmpty()) {
-                trip.imageUrl = getMapUrl(512, 512, tripAndAllLocations.locations)
+                trip.imageUrl = getMapUrl(1024, 1024, tripAndAllLocations.locations)
             }
             tripRepository.saveTrip(trip)
         }

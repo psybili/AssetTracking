@@ -1,15 +1,20 @@
 package sample.onursaygili.assettracking.data
 
 import android.arch.lifecycle.LiveData
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import sample.onursaygili.assettracking.data.local.*
+import sample.onursaygili.assettracking.data.remote.TripService
 import javax.inject.Inject
 
 class TripRepository
 @Inject constructor(
         private val tripDao: TripDao,
-        private val locationDao: LocationDao
+        private val locationDao: LocationDao,
+        private val tripService: TripService
 ) {
-////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     fun getTrips(): LiveData<List<Trip>> {
         return tripDao.listFinishedTrips()
     }
@@ -32,6 +37,17 @@ class TripRepository
 
     fun saveLocation(location: Location) {
         locationDao.save(location)
+    }
+
+    fun updateTrips() {
+        tripService.getTrips()
+                .map {
+                    tripDao.saveAll(it)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(Flowable.empty())
+                .subscribe()
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

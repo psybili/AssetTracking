@@ -10,14 +10,14 @@ import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 import sample.onursaygili.assettracking.App
-import sample.onursaygili.assettracking.di.module.RoomModule
+import sample.onursaygili.assettracking.di.module.DataModule
 
 /**
  * Helper class to automatically inject fragments if they implement [Injectable].
  */
 object AppInjector {
     fun init(app: App) {
-        DaggerAppComponent.builder().application(app).roomModule(RoomModule(app))
+        DaggerAppComponent.builder().application(app).roomModule(DataModule(app))
                 .build().inject(app)
         app
                 .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {

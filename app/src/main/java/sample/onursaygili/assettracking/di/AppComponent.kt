@@ -6,8 +6,8 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.support.AndroidSupportInjectionModule
 import sample.onursaygili.assettracking.App
+import sample.onursaygili.assettracking.di.module.DataModule
 import sample.onursaygili.assettracking.di.module.MainActivityModule
-import sample.onursaygili.assettracking.di.module.RoomModule
 import sample.onursaygili.assettracking.di.module.ViewModelModule
 import javax.inject.Singleton
 
@@ -17,7 +17,7 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     MainActivityModule::class,
     ViewModelModule::class,
-    RoomModule::class
+    DataModule::class
 ])
 interface AppComponent {
 
@@ -26,7 +26,7 @@ interface AppComponent {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun roomModule(roomModule: RoomModule): Builder
+        fun roomModule(dataModule: DataModule): Builder
 
         fun build(): AppComponent
     }
